@@ -9,59 +9,49 @@ const options = {
   },
 };
 
-const fetchTrendingMovies = () => {
-  axios
-    .get("trending/movie/day", options)
-    .then((response) => {
-      console.log(response);
-      return response.data.results;
-    })
-    .catch((error) => {
-      console.error(error);
-    });
+const fetchTrendingMovies = async () => {
+  try {
+    const response = await axios.get("trending/movie/day", options);
+    console.log(response);
+    return response.data.results;
+  } catch (error) {
+    console.error(error);
+  }
 };
 
-const searchMovie = (query) => {
-  axios
-    .get(`search/movie/?query=${query}`, options)
-    .then((response) => {
-      return response.data.results;
-    })
-    .catch((error) => {
-      console.error(error);
-    });
+const searchMovie = async (query) => {
+  try {
+    const response = await axios.get(`search/movie/?query=${query}`, options);
+    return response.data.results;
+  } catch (error) {
+    console.error(error);
+  }
 };
 
-const movieDetails = (movie_id) => {
-  axios
-    .get(`movie/${movie_id}`, options)
-    .then((response) => {
-      return response.data.results;
-    })
-    .catch((error) => {
-      console.error(error);
-    });
+const movieDetails = async (movie_id) => {
+  try {
+    const response = await axios.get(`movie/${movie_id}`, options);
+    return response.data.results;
+  } catch (error) {
+    console.error(error);
+  }
 };
 
-const movieCredits = (movie_id) => {
-  axios
-    .get(`movie/${movie_id}/credits`, options)
-    .then((response) => {
-      return response.data.results;
-    })
-    .catch((error) => {
-      console.error(error);
-    });
+const movieCredits = async (movie_id) => {
+  try {
+    const response = await axios.get(`movie/${movie_id}/credits`, options);
+    return response.data.results;
+  } catch (error) {
+    console.error(error);
+  }
 };
-const movieReviews = (movie_id) => {
-  axios
-    .get(`movie/${movie_id}/reviews`, options)
-    .then((response) => {
-      return response.data.results;
-    })
-    .catch((error) => {
-      console.error(error);
-    });
+const movieReviews = async (movie_id) => {
+  try {
+    const response = await axios.get(`movie/${movie_id}/reviews`, options);
+    return response.data.results;
+  } catch (error) {
+    console.error(error);
+  }
 };
 export default {
   fetchTrendingMovies,

@@ -1,20 +1,24 @@
 import { useEffect, useState } from "react";
-import fetchTrendingMovies from "../../apiService/movies";
+import { useSearchParams } from "react-router-dom";
+import searchMovie from "../../apiService/movies";
+import toast, { Toaster } from "react-hot-toast";
+import SearchForm from "../../components/SearchForm/SearchForm";
 import Loader from "../../components/Loader/Loader";
 import MovieList from "../../components/MovieList/MovieList";
-import toast, { Toaster } from "react-hot-toast";
 
-const HomePage = () => {
+const MoviesPage = () => {
   const [movies, setMovies] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [searchParams, setSearchParams] = useSearchParams();
 
   useEffect(() => {
-    setLoading(true);
     const fetchMovies = async () => {
+      setLoading(true);
       try {
-        const trendMovies = await fetchTrendingMovies.fetchTrendingMovies();
-        setMovies(trendMovies);
+        const searchQuery = searchParams.get("query") || "";
+        const results = await searchMovie(searchQuery);
+        setMovies(results);
       } catch (error) {
         setError(true);
         toast.error("Ooop...something going wrong...try again later");
@@ -23,11 +27,14 @@ const HomePage = () => {
       }
     };
     fetchMovies();
-  }, []);
+  }, [searchParams]);
+  const handleSubmit = (value) => {
+    setSearchParams({ query: value });
+  };
 
   return (
     <>
-      <h2>Trending Movies</h2>
+      <SearchForm onSubmit={handleSubmit} />
       {loading && <Loader />}
       {error && <Toaster position="top-right" reverseOrder={false} />}
       <MovieList movies={movies} />
@@ -35,4 +42,4 @@ const HomePage = () => {
   );
 };
 
-export default HomePage;
+export default MoviesPage;
