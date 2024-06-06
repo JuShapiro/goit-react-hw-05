@@ -33,10 +33,10 @@
   height: 40px;
   border-radius: 4px;
   padding: 8px;
-  background-color: #4e75ff;
+  background-color: orangered;
   border: none;
   color: #fff;
 }
 .btn:hover {
-  background-color: #6c8cff;
+  background-color: orange;
 }

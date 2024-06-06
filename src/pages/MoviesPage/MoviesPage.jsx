@@ -17,7 +17,7 @@ const MoviesPage = () => {
       setLoading(true);
       try {
         const searchQuery = searchParams.get("query") || "";
-        const results = await searchMovie(searchQuery);
+        const results = await searchMovie.searchMovie(searchQuery);
         setMovies(results);
       } catch (error) {
         setError(true);
