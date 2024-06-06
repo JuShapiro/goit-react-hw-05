@@ -10,15 +10,15 @@
   width: 280px;
   height: 40px;
   padding-left: 12px;
-  border-radius: 4px;
+  border-radius: 10px;
   border: 1px solid #808080;
-  background-color: #fff;
+  background-color: rgb(173, 173, 173);
   font-weight: 400;
   font-size: 16px;
   font-family: Montserrat, sans-serif;
   line-height: 150%;
   letter-spacing: 0.04em;
-  color: #808080;
+  color: black;
 }
 .input:hover {
   border: 1px solid black;
@@ -27,16 +27,18 @@
 .input:active,
 .input:focus {
   border: none;
+  outline: none;
 }
 .btn {
   width: 55px;
   height: 40px;
-  border-radius: 4px;
+  border-radius: 10px;
   padding: 8px;
   background-color: orangered;
   border: none;
   color: #fff;
+  transition: scale, 250ms ease-in-out;
 }
 .btn:hover {
-  background-color: orange;
+  transform: scale(1.1);
 }

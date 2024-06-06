@@ -12,6 +12,7 @@ const MovieList = ({ movies }) => {
           <div key={id} className={css.movieList}>
             <Link state={location} to={`/movies/${id}`}>
               <img
+                className={css.imgMovie}
                 src={poster_path ? urlImage : defaultImage}
                 alt={title}
                 width={250}
