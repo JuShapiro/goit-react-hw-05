@@ -24,26 +24,26 @@ const searchMovie = async (query) => {
   return response.data.results;
 };
 
-const movieDetails = async (movie_id) => {
+const movieDetails = async (id) => {
   try {
-    const response = await axios.get(`movie/${movie_id}`, options);
+    const response = await axios.get(`movie/${id}`, options);
     return response.data.results;
   } catch (error) {
     console.error(error);
   }
 };
 
-const movieCredits = async (movie_id) => {
+const movieCredits = async (id) => {
   try {
-    const response = await axios.get(`movie/${movie_id}/credits`, options);
+    const response = await axios.get(`movie/${id}/credits`, options);
     return response.data.results;
   } catch (error) {
     console.error(error);
   }
 };
-const movieReviews = async (movie_id) => {
+const movieReviews = async (id) => {
   try {
-    const response = await axios.get(`movie/${movie_id}/reviews`, options);
+    const response = await axios.get(`movie/${id}/reviews`, options);
     return response.data.results;
   } catch (error) {
     console.error(error);
