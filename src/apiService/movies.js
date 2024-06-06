@@ -20,12 +20,8 @@ const fetchTrendingMovies = async () => {
 };
 
 const searchMovie = async (query) => {
-  try {
-    const response = await axios.get(`search/movie/?query=${query}`, options);
-    return response.data.results;
-  } catch (error) {
-    console.error(error);
-  }
+  const response = await axios.get(`search/movie/?query=${query}`, options);
+  return response.data.results;
 };
 
 const movieDetails = async (movie_id) => {
