@@ -20,27 +20,30 @@ const MovieReviews = () => {
         setReview(reviewData);
       } catch (error) {
         setError(true);
-        toast.error("Please try again later");
+        toast.error("Failed to fetch movie reviews. Please try again later.");
       } finally {
         setLoading(false);
       }
     };
     fetchReviews();
   }, [movieId]);
+
   return (
     <>
       {loading && <Loader />}
       {error && <Toaster position="top-right" reverseOrder={false} />}
-      <ul>
-        {review.map(({ id, author, content }) => {
-          return (
+      {review.length > 0 ? (
+        <ul>
+          {review.map(({ id, author, content }) => (
             <li key={id} className={css.reviewItem}>
               <h3>{author}</h3>
               <p>{content}</p>
             </li>
-          );
-        })}
-      </ul>
+          ))}
+        </ul>
+      ) : (
+        <p>No reviews available for this movie.</p>
+      )}
     </>
   );
 };

@@ -20,15 +20,13 @@ const MovieCast = () => {
         setCast(castData);
       } catch (error) {
         setError(true);
-        toast.error("Please try again later");
+        toast.error("Failed to fetch movie cast. Please try again later.");
       } finally {
         setLoading(false);
       }
     };
     fetchCast();
   }, [movieId]);
-
-  const defaultActorImg = "https://i.imgur.com/YFPCI0O.jpeg";
 
   return (
     <>
@@ -39,11 +37,11 @@ const MovieCast = () => {
           const urlImage = `https://image.tmdb.org/t/p/w500${profile_path}`;
           return (
             <li key={id} className={css.castListItem}>
-              <img
-                src={profile_path ? urlImage : defaultActorImg}
-                alt={original_name}
-                width={250}
-              />
+              {profile_path ? (
+                <img src={urlImage} alt={original_name} width={250} />
+              ) : (
+                <div className={css.noImage}>No image available</div>
+              )}
               <h3>{original_name}</h3>
               <p>Character: {character}</p>
             </li>

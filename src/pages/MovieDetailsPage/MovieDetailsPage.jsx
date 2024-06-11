@@ -24,19 +24,25 @@ const MovieDetailsPage = () => {
   useEffect(() => {
     if (!movieId) return;
     const fetchData = async () => {
+      setLoading(true);
       try {
         const movieData = await movieDetails(movieId);
         setMovies(movieData);
-        setImageUrl(`https://image.tmdb.org/t/p/w500${movieData.poster_path}`);
+        if (movieData.poster_path) {
+          setImageUrl(
+            `https://image.tmdb.org/t/p/w500${movieData.poster_path}`
+          );
+        }
       } catch (error) {
         setError(true);
-        toast.error("Please try again later");
+        toast.error("Failed to fetch movie details. Please try again later.");
       } finally {
         setLoading(false);
       }
     };
     fetchData();
   }, [movieId]);
+
   return (
     <div className={css.detailContainer}>
       <Link to={backLinkRef.current} className={css.backButton}>
@@ -45,22 +51,18 @@ const MovieDetailsPage = () => {
       {loading && <Loader />}
       {movies && (
         <div className={css.detailsWrap}>
-          <img src={imageUrl} alt={movies.title} width={250} />
+          {imageUrl && <img src={imageUrl} alt={movies.title} width={250} />}
           <div>
-            {" "}
             <h2 className={css.detailsText}>{movies.title}</h2>
             <p className={css.detailsText}>
-              <b>Release date:</b>
-              {movies.release_date}
+              <b>Release date:</b> {movies.release_date}
             </p>
             <p className={css.detailsText}>
-              {" "}
-              <b>Overview:</b>
-              {movies.overview}
+              <b>Overview:</b> {movies.overview}
             </p>
             <p className={css.detailsText}>
               <b>Genres:</b>{" "}
-              {movies.genres.map((genre) => genre.name).join(",")}
+              {movies.genres.map((genre) => genre.name).join(", ")}
             </p>
           </div>
         </div>
@@ -68,14 +70,14 @@ const MovieDetailsPage = () => {
 
       <nav className={css.detailsNav}>
         <NavLink to="cast" className={css.detailsBtn}>
-          Movie Cast{" "}
+          Movie Cast
         </NavLink>
         <NavLink to="reviews" className={css.detailsBtn}>
           Movie Reviews
         </NavLink>
       </nav>
       {error && <Toaster position="top-right" reverseOrder={false} />}
-      <Suspense fallback={null}>
+      <Suspense fallback={<Loader />}>
         <Outlet />
       </Suspense>
     </div>
