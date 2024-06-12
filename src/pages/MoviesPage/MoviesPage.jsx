@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
-import searchMovie from "../../apiService/movies";
+import { searchMovie } from "../../apiService/movies";
 import toast, { Toaster } from "react-hot-toast";
 import SearchForm from "../../components/SearchForm/SearchForm";
 import Loader from "../../components/Loader/Loader";
@@ -18,7 +18,7 @@ const MoviesPage = () => {
     const fetchMovies = async () => {
       setLoading(true);
       try {
-        const results = await searchMovie.searchMovie(searchQuery);
+        const results = await searchMovie(searchQuery);
         setMovies(results);
       } catch (error) {
         setError(true);

@@ -9,7 +9,7 @@ const options = {
   },
 };
 
-const fetchTrendingMovies = async () => {
+export const fetchTrendingMovies = async () => {
   try {
     const response = await axios.get("trending/movie/day", options);
     return response.data.results;
@@ -19,7 +19,7 @@ const fetchTrendingMovies = async () => {
   }
 };
 
-const searchMovie = async (query) => {
+export const searchMovie = async (query) => {
   try {
     const response = await axios.get("search/movie", {
       ...options,
@@ -32,7 +32,7 @@ const searchMovie = async (query) => {
   }
 };
 
-const movieDetails = async (id) => {
+export const movieDetails = async (id) => {
   try {
     const response = await axios.get(`movie/${id}`, options);
     return response.data.results;
@@ -42,7 +42,7 @@ const movieDetails = async (id) => {
   }
 };
 
-const movieCredits = async (id) => {
+export const movieCredits = async (id) => {
   try {
     const response = await axios.get(`movie/${id}/credits`, options);
     return response.data.results;
@@ -51,8 +51,7 @@ const movieCredits = async (id) => {
     throw error;
   }
 };
-
-const movieReviews = async (id) => {
+export const movieReviews = async (id) => {
   try {
     const response = await axios.get(`movie/${id}/reviews`, options);
     return response.data.results;
@@ -60,12 +59,4 @@ const movieReviews = async (id) => {
     console.error("Error fetching movie reviews:", error);
     throw error;
   }
-};
-
-export default {
-  fetchTrendingMovies,
-  searchMovie,
-  movieDetails,
-  movieCredits,
-  movieReviews,
 };

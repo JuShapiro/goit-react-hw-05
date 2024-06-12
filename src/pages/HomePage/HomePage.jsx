@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import fetchTrendingMovies from "../../apiService/movies";
+import { fetchTrendingMovies } from "../../apiService/movies";
 import Loader from "../../components/Loader/Loader";
 import MovieList from "../../components/MovieList/MovieList";
 import toast, { Toaster } from "react-hot-toast";
@@ -13,7 +13,7 @@ const HomePage = () => {
     setLoading(true);
     const fetchMovies = async () => {
       try {
-        const trendMovies = await fetchTrendingMovies.fetchTrendingMovies();
+        const trendMovies = await fetchTrendingMovies();
         setMovies(trendMovies);
       } catch (error) {
         setError(true);

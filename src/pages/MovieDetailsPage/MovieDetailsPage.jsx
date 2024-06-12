@@ -6,7 +6,7 @@ import {
   useLocation,
   useParams,
 } from "react-router-dom";
-import movieDetails from "../../apiService/movies";
+import { movieDetails } from "../../apiService/movies";
 import Loader from "../../components/Loader/Loader";
 import css from "./MovieDetailsPage.module.css";
 import toast, { Toaster } from "react-hot-toast";
