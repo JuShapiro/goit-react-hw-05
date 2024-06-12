@@ -12,6 +12,7 @@ const options = {
 export const fetchTrendingMovies = async () => {
   try {
     const response = await axios.get("trending/movie/day", options);
+
     return response.data.results;
   } catch (error) {
     console.error("Error fetching trending movies:", error);
@@ -35,7 +36,7 @@ export const searchMovie = async (query) => {
 export const movieDetails = async (id) => {
   try {
     const response = await axios.get(`movie/${id}`, options);
-    return response.data.results;
+    return response.data;
   } catch (error) {
     console.error("Error fetching movie details:", error);
     throw error;
@@ -45,7 +46,7 @@ export const movieDetails = async (id) => {
 export const movieCredits = async (id) => {
   try {
     const response = await axios.get(`movie/${id}/credits`, options);
-    return response.data.results;
+    return response.data.cast;
   } catch (error) {
     console.error("Error fetching movie credits:", error);
     throw error;
